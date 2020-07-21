@@ -16,8 +16,7 @@ const Error = ({ message }) => {
 };
 
 const actionCodeSettings = {
-  // TODO: Get from env vars
-  url: "http://localhost:3000/login",
+  url: `${process.env.NEXT_PUBLIC_URL}/login`,
   handleCodeInApp: true,
 };
 
