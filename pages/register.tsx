@@ -1,48 +1,31 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import { registrationSchema } from "../schema/registration";
+import { registrationSchema } from "../utils/registration";
 import { yupResolver } from "@hookform/resolvers";
+import { stringify } from "query-string";
+import { plans } from "../utils/plans";
 
 const Label = (props) => <label className="block text-gray-700 font-medium mb-1" {...props} />;
 
-const Error = (name) => {
-  return <div>error message</div>;
+const Error = ({ message }) => {
+  return message ? <div className="text-red-500 text-sm p-1">{message}</div> : null;
 };
 
 export default function IndexPage() {
   const { push } = useRouter();
-  const { register, handleSubmit, watch, errors } = useForm<{ plan: string | boolean }>({
+  const { register, handleSubmit, watch, errors } = useForm<any>({
     defaultValues: {
       plan: false,
     },
     resolver: yupResolver(registrationSchema),
   });
 
-  console.log(errors);
-
-  const plans = [
-    {
-      id: "ordinary",
-      name: "Ordinary Member",
-      price: 10,
-      interval: "monthly",
-      perks: ["Free open sessions", "Discounts on workshop and events", "Voting rights on community matters"],
-    },
-    {
-      id: "associate",
-      name: "Associate member",
-      price: 60,
-      interval: "yearly",
-      perks: ["10 free open sessions", "Support the community"],
-    },
-  ];
-
-  const handleSignup = (v) => {
-    const chosenPlan = plans.find((p) => p.id === plan);
-    push({ pathname: "/confirm", query: { ...v, price: chosenPlan.price, interval: chosenPlan.interval } });
-  };
-
   const plan = watch("plan");
+  const chosenPlan = plans.find((p) => p.id === plan);
+
+  const handleSignup = (details) => {
+    push({ pathname: "/confirm", query: details });
+  };
 
   return (
     <div className="py-16">
@@ -50,7 +33,7 @@ export default function IndexPage() {
         <h1 className="text-4xl font-bold leading-tight border-b pb-4">Registration</h1>
         <form onSubmit={handleSubmit(handleSignup)}>
           <div className="space-y-4">
-            {plans.map(({ name, id, price, interval, perks }) => (
+            {plans.map(({ name, id, price, interval, perks, details }) => (
               <div className="custom-radio" key={id}>
                 <input type="radio" id={id} name="plan" value={id} ref={register()} />
                 <label htmlFor={id}>
@@ -82,18 +65,16 @@ export default function IndexPage() {
               </div>
             ))}
           </div>
-          {plan === "ordinary" && (
+          {plan && (
             <div className="p-4 text-small space-y-4 ">
               <p className="text-sm">
                 We only accept membership payments by SEPA direct debit, to minimise our administration and keep
                 banking costs as low as possible. This is a highly secure payment method and your personal details
                 are kept safe.
               </p>
-              <p className="text-sm">
-                You will be charged on the first working day of each month and will receive a monthly reminder.
-              </p>
-
-              <p className="text-sm">Your membership has no minimum duration and can be cancelled at any time.</p>
+              {chosenPlan.details.map((d, i) => (
+                <p key={i} className="text-sm" children={d} />
+              ))}
 
               <div>
                 <Label htmlFor="name">Name</Label>
@@ -105,6 +86,7 @@ export default function IndexPage() {
                   ref={register()}
                   className="form-input w-full"
                 />
+                <Error message={errors?.name?.message} />
               </div>
               <div>
                 <Label htmlFor="email">Email Address</Label>
@@ -116,26 +98,34 @@ export default function IndexPage() {
                   ref={register()}
                   className="form-input w-full"
                 />
+                <Error message={errors?.email?.message} />
               </div>
               <div>
                 <Label htmlFor="address">Address</Label>
                 <textarea
                   id="address"
                   name="address"
-                  placeholder="123 Street"
+                  placeholder="Hauptstraße 12/3"
                   ref={register()}
                   className="form-textarea w-full"
                   rows={3}
+                  style={{ resize: "none" }}
                 />
+                <Error message={errors?.address?.message} />
               </div>
               <div>
                 <Label htmlFor="iban">IBAN</Label>
                 <input id="address" name="iban" placeholder="" ref={register()} className="form-input w-full" />
+                <Error message={errors?.iban?.message} />
               </div>
 
-              <div>I agree to the code of conduct.</div>
+              <div>
+                <label className="flex items-center">
+                  <input name="newsletter" type="checkbox" className="form-checkbox" ref={register()} />
+                  <span className="ml-2">Yes, sign me up for the newsletter</span>
+                </label>
+              </div>
 
-              <div>I agree to the GDPR consent</div>
               <button type="submit" className="btn w-full">
                 Next &#187;
               </button>

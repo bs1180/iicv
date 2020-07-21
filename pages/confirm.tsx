@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { plans } from "../utils/plans";
 
 const ConfirmationPage = () => {
   const { query } = useRouter();
   const [mandateId] = useState(Math.random().toString(36).slice(-6));
+  const chosenPlan = plans.find((p) => p.id === query.plan);
 
   useEffect(() => {
     // validate and throw if missing query params
   }, [query]);
 
+  if (!chosenPlan) {
+    return <div>Error - invalid plan</div>;
+  }
 
   const handleConfirmation = async (e) => {
-      e.preventDefault()
-      console.log(query)
+    e.preventDefault();
+    // call mutation, then direct to cancel page or display any error
+    console.log(query);
   };
 
   const { name, address, iban, amount, interval } = query;
@@ -32,7 +38,7 @@ const ConfirmationPage = () => {
               </tr>
               <tr>
                 <td>Payment type</td>
-                <td>Recurring</td>
+                <td>{chosenPlan.mandateType}</td>
               </tr>
             </tbody>
           </table>
@@ -87,9 +93,15 @@ const ConfirmationPage = () => {
             </p>
             <p>Your rights are explained in a statement that you can obtain from your bank.</p>
             <form onSubmit={handleConfirmation}>
-            <button type="submit" className="btn w-full">
-              Confirm subscription of €{amount} {interval}
-            </button>
+              <button type="submit" className="btn w-full">
+                {chosenPlan.mandateType === "recurring" ? (
+                  <>
+                    Confirm subscription of €{chosenPlan.price} {chosenPlan.interval}
+                  </>
+                ) : (
+                  <>Confirm one-off payment of €{chosenPlan.price}</>
+                )}
+              </button>
             </form>
           </div>
         </div>
