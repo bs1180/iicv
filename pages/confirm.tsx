@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { plans } from "../utils/plans";
+import Router from "next/router";
 
 const ConfirmationPage = () => {
   const { query } = useRouter();
@@ -19,6 +20,7 @@ const ConfirmationPage = () => {
     e.preventDefault();
     // call mutation, then direct to cancel page or display any error
     console.log(query);
+    Router.push("/thanks");
   };
 
   const { name, address, iban, amount, interval } = query;

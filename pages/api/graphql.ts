@@ -1,5 +1,5 @@
 import { ApolloServer, gql } from "apollo-server-micro";
-import {admin} from '../../utils/firebase-admin'
+import { admin } from "../../utils/firebase-admin";
 
 const FieldValue = admin.firestore.FieldValue;
 
@@ -78,44 +78,38 @@ const resolvers = {
       return output;
     },
     user: async (parent, { id }, context) => {
-      console.log('==content==')
-      console.log(context)
+      console.log("==content==");
+      console.log(context);
 
-      return { id: "123" }
-    }
+      return { id: "123" };
+    },
   },
   Mutation: {
     signup: async (parent, { input }, context) => {
       // TODO: Validate input
-      const user = await admin.auth().createUser({
-        displayName: input.name,
-        email: input.email,
-      });
+      // const user = await admin.auth().createUser({
+      //   displayName: input.name,
+      //   email: input.email,
+      // });
 
-      console.log(context);
+      // console.log(context);
 
-      await admin.firestore().collection("users").doc(user.uid).set({
-        id: user.uid,
-        name: input.name,
-        email: input.email,
-        createdAt: user.metadata.creationTime,
-        admin: true,
-      });
+      // await admin.firestore().collection("users").doc(user.uid).set({
+      //   id: user.uid,
+      //   name: input.name,
+      //   email: input.email,
+      //   createdAt: user.metadata.creationTime,
+      //   admin: true,
+      // });
 
-      console.log(user);
       return true;
     },
     noteCreate: async (_, { input }) => {
-      const insertedNote = await admin
-        .firestore()
-        .collection("users")
-        .doc(input.userId)
-        .collection("notes")
-        .add({
-          content: input.content,
-          createdAt: FieldValue.serverTimestamp(),
-          // createdBy: current user
-        });
+      const insertedNote = await admin.firestore().collection("users").doc(input.userId).collection("notes").add({
+        content: input.content,
+        createdAt: FieldValue.serverTimestamp(),
+        // createdBy: current user
+      });
 
       const note = await insertedNote.get();
 
@@ -130,13 +124,17 @@ const resolvers = {
   },
 };
 
-const apolloServer = new ApolloServer({ typeDefs, resolvers, context: ({req}) => {
-  console.log(req.headers)
-  console.log(req.cookies)
-  return {
-    user: "foo"
-  }
-} });
+const apolloServer = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ req }) => {
+    console.log(req.headers);
+    console.log(req.cookies);
+    return {
+      user: "foo",
+    };
+  },
+});
 
 export const config = {
   api: {
