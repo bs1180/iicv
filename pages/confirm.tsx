@@ -9,9 +9,13 @@ const ConfirmationPage = () => {
     // validate and throw if missing query params
   }, [query]);
 
-  const { name, address, iban, amount, interval } = query;
 
-  const handleConfirmation = async () => {};
+  const handleConfirmation = async (e) => {
+      e.preventDefault()
+      console.log(query)
+  };
+
+  const { name, address, iban, amount, interval } = query;
 
   return (
     <div className="py-16">
@@ -39,7 +43,7 @@ const ConfirmationPage = () => {
               <tbody>
                 <tr>
                   <td>Creditor ID</td>
-                  <td>1234567</td>
+                  <td>123456789</td>
                 </tr>
                 <tr>
                   <td>Name</td>
@@ -47,7 +51,7 @@ const ConfirmationPage = () => {
                 </tr>
                 <tr>
                   <td>Address</td>
-                  <td>123 Madeup</td>
+                  <td>Semmelweisgasse 7, 1210 Wien</td>
                 </tr>
               </tbody>
             </table>
@@ -81,10 +85,12 @@ const ConfirmationPage = () => {
               your bank. A refund must be claimed within eight weeks starting from the date on which your account
               was debited.
             </p>
-            <p>Your rights are explained in a statement that you can obtain from your bank</p>
+            <p>Your rights are explained in a statement that you can obtain from your bank.</p>
+            <form onSubmit={handleConfirmation}>
             <button type="submit" className="btn w-full">
               Confirm subscription of €{amount} {interval}
             </button>
+            </form>
           </div>
         </div>
       </div>
