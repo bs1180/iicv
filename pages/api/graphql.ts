@@ -1,5 +1,6 @@
 import { ApolloServer, gql } from "apollo-server-micro";
 import { admin } from "../../utils/firebase-admin";
+import cookie from "cookie";
 
 const FieldValue = admin.firestore.FieldValue;
 
@@ -59,12 +60,15 @@ const typeDefs = gql`
   }
 `;
 
+const admins = ["viktutetute@gmail.com", "axel_103@hotmail.com", "coline.cadoret@gmail.com", "sf.alden@yahoo.com"];
+
 const resolvers = {
   Note: {
     createdAt: (note) => note.createdAt.toMillis(),
   },
   Query: {
     users: async (parent, args, context) => {
+      console.log(context);
       const snapshot = await admin.firestore().collection("users").get();
 
       const output = [];
@@ -87,20 +91,22 @@ const resolvers = {
   Mutation: {
     signup: async (parent, { input }, context) => {
       // TODO: Validate input
-      // const user = await admin.auth().createUser({
-      //   displayName: input.name,
-      //   email: input.email,
-      // });
+      const user = await admin.auth().createUser({
+        displayName: input.name,
+        email: input.email,
+      });
 
-      // console.log(context);
+      const isAdmin = admins.includes(input.email.toLowerCase());
 
-      // await admin.firestore().collection("users").doc(user.uid).set({
-      //   id: user.uid,
-      //   name: input.name,
-      //   email: input.email,
-      //   createdAt: user.metadata.creationTime,
-      //   admin: true,
-      // });
+      await admin.firestore().collection("users").doc(user.uid).set({
+        id: user.uid,
+        name: input.name,
+        email: input.email,
+        plan: input.plan,
+        subscriptionStatus: "PENDING_SETUP",
+        createdAt: user.metadata.creationTime,
+        admin: isAdmin,
+      });
 
       return true;
     },
@@ -127,11 +133,30 @@ const resolvers = {
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => {
-    console.log(req.headers);
-    console.log(req.cookies);
+  context: async ({ req }) => {
+    console.log("== initialising context =======");
+    // const cookies = cookie.parse(req.headers?.cookie);
+    const { bearer } = req.headers;
+
+    if (bearer) {
+      const decoded = await admin
+        .auth()
+        .verifyIdToken(bearer)
+        .catch((err) => {
+          console.log(err);
+        });
+      if (decoded) {
+        console.log(decoded);
+        // TODO: If they've logged in but no user record (first time?) make one for them.
+        const user = await (await admin.firestore().collection("users").doc(decoded.uid).get()).data();
+        if (user) {
+          return { user };
+        }
+      }
+    }
+
     return {
-      user: "foo",
+      user: undefined,
     };
   },
 });

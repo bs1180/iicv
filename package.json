@@ -10,6 +10,7 @@
     "@hookform/resolvers": "^0.0.6",
     "@tailwindcss/ui": "^0.4.0",
     "apollo-server-micro": "^2.16.0",
+    "cookie": "^0.4.1",
     "firebase": "^7.16.1",
     "firebase-admin": "^9.0.0",
     "iban": "^0.0.14",

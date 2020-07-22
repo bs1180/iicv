@@ -1,5 +1,26 @@
+import { useQuery } from "react-query";
+import { fetcher } from "../../utils/fetcher";
+
+const fetchMembers = fetcher(`{ 
+  users { 
+    id
+    name
+    email
+  } }`);
+
 const AdminDashboard = ({ users }) => {
-  const members = users?.data?.users ?? [];
+  const { isLoading, error, data } = useQuery("members", fetchMembers);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Oops, can't retrieve that.</div>;
+  }
+
+  console.log(data);
+  const members = [];
 
   return (
     <div className="">
@@ -16,21 +37,5 @@ const AdminDashboard = ({ users }) => {
     </div>
   );
 };
-
-export async function getServerSideProps({ req }) {
-  const users = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/graphql`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      query: `{ 
-      users { 
-        id
-        name
-        email
-      } }`,
-    }),
-  }).then((res) => res.json());
-  return { props: { users } };
-}
 
 export default AdminDashboard;
