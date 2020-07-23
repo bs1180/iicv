@@ -35,7 +35,7 @@ const ConfirmationPage = () => {
   const { name, address, iban } = query;
 
   return (
-    <div className="py-16">
+    <div className="py-8 lg:py-16">
       <div className="bg-transparent text-left max-w-lg mx-auto space-y-8">
         <h1 className="text-4xl font-bold leading-tight border-b pb-4">Complete registration</h1>
         <div className="shadow bg-white p-4 space-y-4 rounded">

@@ -27,7 +27,7 @@ export default function IndexPage() {
   };
 
   return (
-    <div className="py-16">
+    <div className="py-8 lg:py-16">
       <div className="container bg-transparent text-left max-w-lg p-8 mx-auto space-y-8">
         <h1 className="text-4xl font-bold leading-tight border-b pb-4">Registration</h1>
         <form onSubmit={handleSubmit(handleSignup)}>
