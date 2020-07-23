@@ -21,11 +21,12 @@ export default async (req, res) => {
 
     const sheet = doc.sheetsByIndex[0];
 
-    const { name, address, iban, newsletter, plan, mandate_id } = payload;
+    const { name, email, address, iban, newsletter, plan, mandate_id } = payload;
 
     await sheet.addRow(
       {
         name,
+        email,
         address,
         iban,
         newsletter,
