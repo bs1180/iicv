@@ -17,7 +17,7 @@ export const plans = [
     price: 60,
     interval: "yearly",
     mandateType: "one-off",
-    perks: ["10 free open sessions", "Support the community"],
+    perks: ["Free entry to performances", "Support the community"],
     details: ["You will be charged only once and your membership will not automatically renew."],
   },
 ];

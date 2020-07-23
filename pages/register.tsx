@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { registrationSchema } from "../utils/registration";
 import { yupResolver } from "@hookform/resolvers";
-import { stringify } from "query-string";
 import { plans } from "../utils/plans";
 
 const Label = (props) => <label className="block text-gray-700 font-medium mb-1" {...props} />;
@@ -33,7 +32,7 @@ export default function IndexPage() {
         <h1 className="text-4xl font-bold leading-tight border-b pb-4">Registration</h1>
         <form onSubmit={handleSubmit(handleSignup)}>
           <div className="space-y-4">
-            {plans.map(({ name, id, price, interval, perks, details }) => (
+            {plans.map(({ name, id, price, interval, perks }) => (
               <div className="custom-radio" key={id}>
                 <input type="radio" id={id} name="plan" value={id} ref={register()} />
                 <label htmlFor={id}>
