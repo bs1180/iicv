@@ -2,28 +2,37 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { plans } from "../utils/plans";
 import Router from "next/router";
+import axios from "redaxios";
 
 const ConfirmationPage = () => {
   const { query } = useRouter();
-  const [mandateId] = useState(Math.random().toString(36).slice(-6));
+  const [mandate_id] = useState(Math.random().toString(36).slice(-6));
   const chosenPlan = plans.find((p) => p.id === query.plan);
-
-  useEffect(() => {
-    // validate and throw if missing query params
-  }, [query]);
+  const [errors, setErrors] = useState<string>();
+  const [submitting, setSubmitting] = useState(false);
 
   if (!chosenPlan) {
     return <div>Error - invalid plan</div>;
   }
 
   const handleConfirmation = async (e) => {
+    setErrors(null);
     e.preventDefault();
-    // call mutation, then direct to cancel page or display any error
-    console.log(query);
-    Router.push("/thanks");
+    setSubmitting(true);
+    try {
+      await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/register`, {
+        ...query,
+        mandate_id,
+      });
+      Router.push("/thanks");
+    } catch (err) {
+      setErrors("Sorry, an error occurred - your registration has not been submitted");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  const { name, address, iban, amount, interval } = query;
+  const { name, address, iban } = query;
 
   return (
     <div className="py-16">
@@ -36,7 +45,7 @@ const ConfirmationPage = () => {
             <tbody>
               <tr>
                 <td>Mandate reference</td>
-                <td>{mandateId}</td>
+                <td>{mandate_id}</td>
               </tr>
               <tr>
                 <td>Payment type</td>
@@ -51,11 +60,11 @@ const ConfirmationPage = () => {
               <tbody>
                 <tr>
                   <td>Creditor ID</td>
-                  <td>123456789</td>
+                  <td>AT79ZZZ00000067772</td>
                 </tr>
                 <tr>
                   <td>Name</td>
-                  <td>International Improv Community Vienna</td>
+                  <td>International Improv Community in Vienna</td>
                 </tr>
                 <tr>
                   <td>Address</td>
@@ -94,9 +103,16 @@ const ConfirmationPage = () => {
               was debited.
             </p>
             <p>Your rights are explained in a statement that you can obtain from your bank.</p>
+            {errors && (
+              <div className="text-red-500 space-y-2">
+                <div>{errors}</div>
+              </div>
+            )}
             <form onSubmit={handleConfirmation}>
               <button type="submit" className="btn w-full">
-                {chosenPlan.mandateType === "recurring" ? (
+                {submitting ? (
+                  "Submitting..."
+                ) : chosenPlan.mandateType === "recurring" ? (
                   <>
                     Confirm subscription of €{chosenPlan.price} {chosenPlan.interval}
                   </>
