@@ -20,7 +20,7 @@ const ConfirmationPage = () => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/register`, {
+      await axios.post(`/api/register`, {
         ...query,
         mandate_id,
       });
