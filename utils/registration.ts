@@ -6,7 +6,7 @@ export const registrationSchema = yup.object().shape({
   email: yup.string().email().required("Required"),
   address: yup.string().required("Required"),
   iban: yup.string().required("Required").test("isIban", "Invalid IBAN", iban.isValid),
-  newsletter: yup.boolean(),
+  newsletter: yup.boolean().nullable(),
   plan: yup.string().required(),
   mandate_id: yup.string(),
 });
