@@ -41,7 +41,7 @@ export default async (req, res) => {
     res.json({ created: true });
   } catch (err) {
     console.log("=== Failed to register members===");
-
+console.log(req.body)
     console.error(err);
     res.status(400).json({ err });
   }
