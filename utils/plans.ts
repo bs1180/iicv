@@ -1,7 +1,7 @@
 export const plans = [
   {
     id: "ordinary",
-    name: "Ordinary Member",
+    name: "Membership",
     price: 10,
     interval: "monthly",
     mandateType: "recurring",
@@ -13,7 +13,7 @@ export const plans = [
   },
   {
     id: "associate",
-    name: "Associate member",
+    name: "Associate Membership",
     price: 60,
     interval: "yearly",
     mandateType: "one-off",
