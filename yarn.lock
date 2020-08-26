@@ -1037,6 +1037,18 @@
   resolved "https://registry.yarnpkg.com/@next/react-refresh-utils/-/react-refresh-utils-9.4.4.tgz#d94cbb3b354a07f1f5b80e554d6b9e34aba99e41"
   integrity sha512-9nKENeWRI6kQk44TbeqleIVtNLfcS3klVUepzl/ZCqzR5Bi06uqBCD277hdVvG/wL1pxA+R/pgJQLqnF5E2wPQ==
 
+"@stripe/react-stripe-js@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@stripe/react-stripe-js/-/react-stripe-js-1.1.2.tgz#a7f5ef5b4d7dc7fa723501b706644414cfe6dcba"
+  integrity sha512-07hu8RJXwWKGbvdvd1yt1cYvGtDB8jFX+q10f7FQuItUt9rlSo0am3WIx845iMHANiYgxyRb1PS201Yle9xxPQ==
+  dependencies:
+    prop-types "^15.7.2"
+
+"@stripe/stripe-js@^1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.9.0.tgz#a4a166b5de88903573c9a7fd04f39610648f4769"
+  integrity sha512-/8+zfeRHlsEsxj0qmq9qbrnyF3fx+r97sDxfv7kqOyZFUFzC7DBwQwZlmss6XiV3ez5vz1G1QIjEW29PmLmsAw==
+
 "@tailwindcss/custom-forms@^0.2.1":
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/@tailwindcss/custom-forms/-/custom-forms-0.2.1.tgz#40e5ed1fff6d29d8ed1c508a0b2aaf8da96962e0"
@@ -1070,6 +1082,11 @@
   version "7.0.5"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.5.tgz#dcce4430e64b443ba8945f0290fb564ad5bac6dd"
   integrity sha512-7+2BITlgjgDhH0vvwZU/HZJVyk+2XUlvxXe8dFMedNX/aMkaOq++rMAFXc0tM7ij15QaWlbdQASBR9dihi+bDQ==
+
+"@types/node@>=8.1.0":
+  version "14.0.27"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.27.tgz#a151873af5a5e851b51b3b065c9e63390a9e0eb1"
+  integrity sha512-kVrqXhbclHNHGu9ztnAwSncIgJv/FaxmzXJvGXNdcCpV1b8u1/Mi6z6m0vwy0LzKeXFTPLH0NzwmoJ3fNCIq0g==
 
 "@types/node@^14.0.23":
   version "14.0.23"
@@ -5195,7 +5212,7 @@ prop-types-exact@1.2.0:
     object.assign "^4.1.0"
     reflect.ownkeys "^0.2.0"
 
-prop-types@15.7.2, prop-types@^15.6.2:
+prop-types@15.7.2, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -5280,6 +5297,11 @@ q@^1.1.2:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
+
+qs@^6.6.0:
+  version "6.9.4"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.4.tgz#9090b290d1f91728d3c22e54843ca44aea5ab687"
+  integrity sha512-A1kFqHekCTM7cz0udomYUoYNWjBebHm/5wzU/XqrBRBNWectVH0QIiN+NEcZ0Dte5hvzHwbr8+XQmguPhJ6WdQ==
 
 query-string@^4.1.0:
   version "4.3.4"
@@ -5929,6 +5951,14 @@ strip-ansi@^3.0.0:
   dependencies:
     ansi-regex "^2.0.0"
 
+stripe@^8.86.0:
+  version "8.86.0"
+  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.86.0.tgz#24578736e742a178527d20657f0777e04ba66552"
+  integrity sha512-E7Njw+h50TZys2G8QBipIbYQzDVC9L9WT+4Zb1JBepS5ZkWrAJxbk9DXETrs23xj/3jzSevjMelfy3YxN0qFZQ==
+  dependencies:
+    "@types/node" ">=8.1.0"
+    qs "^6.6.0"
+
 style-loader@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-1.2.1.tgz#c5cbbfbf1170d076cfdd86e0109c5bba114baa1a"
@@ -6458,6 +6488,11 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
+
+wretch@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/wretch/-/wretch-1.7.2.tgz#03f8f875b45204e3d4d91583122368a803965bd5"
+  integrity sha512-VnA7uC9bGyIBGz4pK/iM9AVxsod4CwKoCBP7YClijlcU0FsckOXkyqLSV/cTykck8YszCD9r1Pci1p5n42Cocg==
 
 xtend@^4.0.0, xtend@^4.0.2, xtend@~4.0.1:
   version "4.0.2"

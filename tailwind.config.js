@@ -12,6 +12,9 @@ module.exports = {
       default: {
         input: {
           borderRadius: theme("borderRadius.default"),
+          "&:focus": {
+            borderColor: theme("colors.blue[400]"),
+          },
         },
       },
     }),

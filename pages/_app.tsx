@@ -7,6 +7,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css"></link>
         <title>IICV</title>
+        <script src="https://js.stripe.com/v3/"></script>
       </Head>
       <Component {...pageProps} />
     </>
