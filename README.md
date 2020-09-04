@@ -1,1 +1,3 @@
 This is the website for the International Improv Community in Vienna.
+
+Terraform is used for the limited configuration required. The AWS_ACCESS_KEY_ID and AWS_SMTP_PASSWORD values should be set as environment variables. The DNS DKIM and TXT values should be set in the domain name registrar control panel - a total of 4 records need to be created, which will allow sending emails with the iicv.at domain and prevent them going to spam.
