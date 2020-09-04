@@ -10,8 +10,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   host: "email-smtp.eu-central-1.amazonaws.com",
   auth: {
-    user: process.env.AWS_ACCESS_KEY_ID,
-    pass: process.env.AWS_SMTP_PASSWORD,
+    user: process.env.IICV_AWS_ACCESS_KEY_ID,
+    pass: process.env.IICV_AWS_SMTP_PASSWORD,
   },
 });
 
