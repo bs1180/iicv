@@ -16,6 +16,7 @@
     "js-cookie": "^2.2.1",
     "nanoid": "^3.1.10",
     "next": "^9.2.0",
+    "nodemailer": "^6.4.11",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-hook-form": "^6.0.8",
