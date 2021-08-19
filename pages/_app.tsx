@@ -9,7 +9,11 @@ function MyApp({ Component, pageProps }) {
         <title>IICV</title>
         <script src="https://js.stripe.com/v3/"></script>
       </Head>
-      <Component {...pageProps} />
+      <div className="bg-gray-50 min-h-screen flex ">
+        <div className="mx-auto max-w-sm md:max-w-2xl px-8 space-y-8 py-4 md:py-16 border-t-4 border-transparent">
+          <Component {...pageProps} />
+        </div>
+      </div>
     </>
   );
 }

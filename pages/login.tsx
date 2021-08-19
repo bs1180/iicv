@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import wretch from "wretch";
 
 export default function LoginPage() {
-  const { register, handleSubmit, errors, formState } = useForm<{ email: string }>();
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<{ email: string }>();
   const [message, setMessage] = useState<{ status: "success" | "error"; text: string }>();
 
   const login = async ({ email }) => {
@@ -43,12 +43,12 @@ export default function LoginPage() {
               name="email"
               placeholder="kate@example.com"
               className="form-input w-full"
-              ref={register({ required: "Required" })}
+              {...register("email", { required: "Required" })}
             />
             <Error message={errors?.email?.message} />
           </div>
           <button type="submit" className="btn w-full">
-            {formState.isSubmitting ? "Submitting..." : "Login"}
+            {isSubmitting ? "Submitting..." : "Login"}
           </button>
         </form>
       </div>
