@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { registrationSchema } from "../utils/registration";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import wretch from "wretch";
 import { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
@@ -15,7 +15,7 @@ export default function RegistrationForm({ plan }) {
   const [paymentError, setPaymentError] = useState<string>();
   const router = useRouter();
 
-  const { register, handleSubmit, errors, formState } = useForm<any>({
+  const { register, handleSubmit, formState: { errors, isSubmitting} } = useForm<any>({
     resolver: yupResolver(registrationSchema),
   });
 
@@ -78,7 +78,7 @@ export default function RegistrationForm({ plan }) {
           id="name"
           name="name"
           placeholder="John Doe"
-          ref={register()}
+          {...register("name")}
           className="form-input w-full"
         />
         <Error message={errors?.name?.message} />
@@ -90,7 +90,7 @@ export default function RegistrationForm({ plan }) {
           id="email"
           name="email"
           placeholder="john@example.com"
-          ref={register()}
+          {...register("email")}
           className="form-input w-full"
         />
         <Error message={errors?.email?.message} />
@@ -113,13 +113,13 @@ export default function RegistrationForm({ plan }) {
       <Error message={paymentError} />
       <div>
         <label className="flex items-center">
-          <input name="newsletter" type="checkbox" className="form-checkbox" ref={register()} />
+          <input name="newsletter" type="checkbox" className="form-checkbox" {...register("newsletter")} />
           <span className="ml-2">Yes, sign me up for the newsletter</span>
         </label>
       </div>
 
       <button type="submit" className="btn w-full">
-        {formState.isSubmitting ? (
+        {isSubmitting ? (
           "Submitting..."
         ) : plan.mandateType === "recurring" ? (
           <>
