@@ -1,0 +1,86 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Membership">
+  <section class="max-w-lg mx-auto space-y-8">
+    <h1 class="text-3xl font-bold leading-tight text-gray-900 text-center">
+      Imprint
+    </h1>
+    <h3 class="text-xl font-semibold text-center">
+      International Improv Community in Vienna
+    </h3>
+    <div>
+      Verein zur Förderung internationaler Kunstschaffender und deren
+      Integration in die österreichische Kulturszene
+    </div>
+    <div>ZVR-Number: 1236421179</div>
+    <div>Address: Semmelweisgasse 7, 1210 Wien</div>
+    <hr />
+    <h2 class="text-xl font-semibold text-center">Need to get in touch?</h2>
+    <p class="text-center">
+      We also have an <a
+        class="underline"
+        href="https://forms.gle/651d2F4874qJ8HBV7">anonymous feedback form</a
+      >
+    </p>
+    <form
+      action="https://api.web3forms.com/submit"
+      method="POST"
+      class="space-y-4"
+    >
+      <div>
+        <input
+          type="hidden"
+          name="access_key"
+          value="0ab0a64a-ab8f-4d6e-a8de-f2d4682ead61"
+        />
+        <label
+          for="name"
+          class="block text-sm font-medium leading-4 text-gray-900 mb-2"
+          >Your Name</label
+        >
+        <input
+          type="text"
+          name="name"
+          required
+          class="focus:ring focus:ring-yellow-200 w-full"
+        />
+      </div>
+      <div>
+        <label
+          for="email"
+          class="block text-sm font-medium leading-4 text-gray-900 mb-2"
+          >Your email address</label
+        >
+        <input
+          type="email"
+          name="email"
+          required
+          class="focus:ring focus:ring-yellow-200 w-full"
+        />
+      </div>
+      <div>
+        <label
+          for="message"
+          class="block text-sm font-medium leading-4 text-gray-900 mb-2"
+          >Your message</label
+        >
+        <textarea
+          name="message"
+          required
+          class="focus:ring focus:ring-yellow-200 w-full"
+          rows="4"></textarea>
+      </div>
+      <div class="h-captcha" data-captcha="true"></div>
+      <div class="flex justify-end">
+        <button
+          type="submit"
+          class="bg-[#F5B142] text-color-[#F5B142] py-2 px-4 rounded font-semibold"
+          >Submit</button
+        >
+      </div>
+    </form>
+    <script src="https://web3forms.com/client/script.js" async defer></script>
+  </section>
+</Layout>

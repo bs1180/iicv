@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="IICV">
+  <section class="flex flex-col items-center px-8">
+    <div class="space-y-4 text-center">
+      <h1 class="text-3xl font-bold leading-tight text-gray-900 text-center">
+        International Improv Community in Vienna
+      </h1>
+      <div>
+        We are an English language improv group based in Vienna, Austria.
+      </div>
+      <div>
+        To stay informed, please see our <a
+          class="underline"
+          href="https://www.meetup.com/International-Improv-Wien">Meetup</a
+        >, <a
+          class="underline"
+          href="https://www.facebook.com/InternationalImprovVienna">Facebook</a
+        > and <a
+          class="underline"
+          href="https://www.instagram.com/iicv_improv_vienna/"
+        >
+          Instagram</a
+        >
+         pages
+      </div>
+      <div>
+        If you've attended some of our open sessions, you can
+        <a class="underline" href="/membership">become a member</a>
+      </div>
+    </div>
+  </section>
+  <section class="my-20 max-w-4xl mx-auto px-8">
+    <div class="sk-meetup-event" data-embed-id="224264"></div>
+    <script
+      src="https://widgets.sociablekit.com/meetup-group-events/widget.js"
+      async
+      defer></script>
+  </section>
+</Layout>

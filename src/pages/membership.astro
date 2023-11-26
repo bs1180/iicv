@@ -1,0 +1,90 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon";
+---
+
+<Layout title="Membership">
+  <section class="max-w-lg mx-auto space-y-8">
+    <h1 class="text-3xl font-bold leading-tight text-gray-900 text-center">
+      Membership
+    </h1>
+
+    <p>
+      As an volunteer run association, we welcome new members with an enthusiasm
+      for improv. We offer two types of membership:
+    </p>
+    <div class="border p-8 rounded space-y-4">
+      <div class="flex justify-between">
+        <h3 class="text-xl font-bold">Regular Membership</h3>
+        <div>€10 per month</div>
+      </div>
+      <p class="text-sm text-zinc-500">
+        Your membership will begin immediately, has no minimum duration and can
+        be easily cancelled at any time.
+      </p>
+      <ul class="space-y-1">
+        {
+          [
+            "Free open sessions",
+            "Discounts on workshop and events",
+            "Voting rights on community matters",
+          ].map((i) => (
+            <li>
+              <Icon
+                name="mdi:check"
+                className="h-4 w-4 inline mr-1 text-zinc-800/50"
+              />
+              {i}
+            </li>
+          ))
+        }
+      </ul>
+      <div class="flex justify-end">
+        <a
+          href=" https://buy.stripe.com/4gw7um8Eng5q6Ws4gg"
+          class="bg-[#F5B142] text-color-[#F5B142] py-2 px-4 rounded font-semibold"
+        >
+          Sign up
+          <Icon name="mdi:chevron-double-right" className="h-4 w-4 inline" />
+        </a>
+      </div>
+    </div>
+
+    <div class="border p-8 rounded space-y-4">
+      <div class="flex justify-between">
+        <h3 class="text-xl font-bold">Associate Membership</h3>
+        <div>€60 per year</div>
+      </div>
+      <p class="text-sm text-zinc-500">
+        If you would like to support our organisation without regularly
+        participating, our associate membership is for you. Your membership will
+        not autorenew.
+      </p>
+      <ul class="space-y-1">
+        {
+          ["Free to performances", "Support the community"].map((i) => (
+            <li>
+              <Icon
+                name="mdi:check"
+                className="h-4 w-4 inline mr-1 text-zinc-800/50"
+              />
+              {i}
+            </li>
+          ))
+        }
+      </ul>
+      <div class="flex justify-end">
+        <a
+          href=" https://buy.stripe.com/4gw7um8Eng5q6Ws4gg"
+          class="bg-[#F5B142] text-color-[#F5B142] py-2 px-4 rounded font-semibold"
+        >
+          Sign up
+          <Icon name="mdi:chevron-double-right" className="h-4 w-4 inline" />
+        </a>
+      </div>
+    </div>
+    <div class="text-center">
+      We process payments securely using <a class="hover:underline" href="https://stripe.com/">Stripe</a>
+    </div>
+  </section>
+</Layout>
