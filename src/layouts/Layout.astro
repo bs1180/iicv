@@ -20,15 +20,20 @@ const { title } = Astro.props;
   </head>
   <body>
     <div class="container mx-auto mb-12">
-      <div class="absolute top-8 right-8">
+      <div class="absolute top-0 right-0 md:top-4 md:right-4">
         <a
           href="https://billing.stripe.com/p/login/eVadTA74F7x7gCc000"
-          class="hover:underline text-gray-600/80">Member login</a
+          class="block hover:underline text-gray-600/80 text-sm md:text-base p-4"
+          >Member login</a
         >
       </div>
-      <div class="flex justify-center">
-        <a href="/">
-          <Image src={logo} alt="IICV logo" class="h-[100px] md:h-[200px]" />
+      <div class="flex justify-center items-start">
+        <a href="/" class="">
+          <Image
+            src={logo}
+            alt="IICV logo"
+            class="h-[100px] md:h-[200px] w-[100px] md:w-[200px]"
+          />
         </a>
       </div>
 
