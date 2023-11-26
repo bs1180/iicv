@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import qrcode from "./qr_code_open_session.png";
+---
+
+<Layout title="Membership">
+  <section class="max-w-lg mx-auto space-y-8 pb-8">
+    <h1 class="text-3xl font-bold leading-tight text-gray-900 text-center">
+      One-off payment of €7
+    </h1>
+    <div class="flex flex-col items-center justify-center">
+      <Image src={qrcode} alt="" class="w-64" />
+
+      <div class="text-center p-8">
+        or <a href="https://buy.stripe.com/9AQ8yq8En3iE0y45km" class="underline"
+          >Pay on this device</a
+        >
+      </div>
+    </div>
+  </section>
+</Layout>
